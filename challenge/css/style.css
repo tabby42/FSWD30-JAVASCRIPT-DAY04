@@ -1,0 +1,15 @@
+html,
+body {
+  height: 100%; }
+
+#wrapper {
+  width: 320px;
+  margin: 0 auto;
+  min-height: 500px;
+  background-color: #eee;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+/*# sourceMappingURL=style.css.map */
