@@ -18,3 +18,10 @@ function displayReadingStatus ( booklist, id ) {
 }
 
 displayReadingStatus(library, "library");
+
+function truncate ( string, numChar ) {
+	var newString = string.substring(0, numChar - 1);
+	return newString;
+}
+
+document.getElementById("truncate").innerHTML = truncate("I am a hero from World of Warcraft", 12);
