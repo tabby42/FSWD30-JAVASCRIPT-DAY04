@@ -1,17 +1,77 @@
 $mainColor: #28BB3C;
 
-html,
-body {
+html {
 	height: 100%;
+}
+
+body {
+	min-height: 100%;
+    font-family: sans-serif;
 }
 
 #wrapper {
 	width: 320px;
-	margin: 0 auto;
+	margin: 50px auto;
 	min-height: 500px;
 	background-color: #eee;
     position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    /* top: 50%;*/
+    /* -webkit-transform: translateY(-50%);*/
+    /*         transform: translateY(-50%);*/
+    border-left: 1px solid #bbb;
 }
+
+#inout {
+	background-color: #000;
+	border: 1px solid #000;
+	color: #fff;
+	font-size: 2em;
+    outline: 0;
+    padding: 0 20px;
+    text-align: right;
+    min-height: 142px;
+}
+
+.flex-row {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    > div {
+    	border-right: 1px solid #bbb;
+    	border-bottom: 1px solid #bbb;
+    	-webkit-box-flex: 1;
+    	    -ms-flex: 1;
+    	        flex: 1;
+        text-align: center;
+        padding: 20px 0;
+        cursor: pointer;
+		-ms-flex-preferred-size: 19%;
+		    flex-basis: 19%;
+    	font-size: 1.2em;
+    	&:hover, &:focus {
+    		opacity: .6;
+    	}
+    }
+}
+
+.white {
+	background-color: #fff;
+}
+
+.green {
+	background-color: $mainColor;
+	color: #fff;
+}
+ 
+.darker {
+	background-color: #ccc;
+}
+
+
+
