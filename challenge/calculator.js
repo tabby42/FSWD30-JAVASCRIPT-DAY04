@@ -27,33 +27,47 @@ var numbers = {
 	zero: 0
 }
 
+//TODOs:
+//remove possible leading zero
+//prevent entering a second operator
+//show last result or operation
+//backspace function -> remove last character from display,
+
+
+
 document.addEventListener("click", processInput);
 function processInput ( event ) {
 	var elementId = event.target.getAttribute("id");
 	switch ( elementId ) {
 		case "one":
-			if (!opsClicked && !numOneReady) {
-				numberOne += numbers.one;
-			} else {
-				numberTwo += numbers.one;
-			}
-			inScreen.innerHTML += numbers.one;
+			numberClicked("one");
 			break;
 		case "two":
-			if (!opsClicked && !numOneReady) {
-				numberOne += numbers.two;
-			} else {
-				numberTwo += numbers.two;
-			}
-			inScreen.innerHTML += numbers.two;
+			numberClicked("two");
 			break;
 		case "three":
-			if (!opsClicked && !numOneReady) {
-				numberOne += numbers.three;
-			} else {
-				numberTwo += numbers.three;
-			}
-			inScreen.innerHTML += numbers.three;
+			numberClicked("three");
+			break;
+		case "four":
+			numberClicked("four");
+			break;
+		case "five":
+			numberClicked("five");
+			break;
+		case "six":
+			numberClicked("six");
+			break;
+		case "seven":
+			numberClicked("seven");
+			break;
+		case "eight":
+			numberClicked("eight");
+			break;
+		case "nine":
+			numberClicked("nine");
+			break;
+		case "zero":
+			numberClicked("zero");
 			break;
 		case "plus":
 			ops = basicOperations.plus;
@@ -63,7 +77,20 @@ function processInput ( event ) {
 		case "minus":
 			ops = basicOperations.minus;
 			opsClicked = true;
+			//lockOps();
 			inScreen.innerHTML += basicOperations.minus;
+			break;
+		case "multiply":
+			ops = basicOperations.multiply;
+			opsClicked = true;
+			//lockOps();
+			inScreen.innerHTML += basicOperations.multiply;
+			break;
+		case "divide":
+			ops = basicOperations.divide;
+			opsClicked = true;
+			//lockOps();
+			inScreen.innerHTML += basicOperations.divide;
 			break;
 		case "clear":
 			clear();
@@ -84,14 +111,26 @@ function printOut ( ) {
 }
 
 function clear() {
-	inScreen.innerHTML = "";
-	result = 0;
+ 	inScreen.innerHTML = "";
+ 	result = 0;
 	opsClicked = false;
- 	numberOne = "";
- 	numberTwo = "";
- 	ops = "";
- 	tooMany = false;
+	numberOne = "";
+	numOneReady = false;
+	numberTwo = "";
+	numTwoReady = false;
+	ops = "";
 }
+
+function numberClicked ( prop ) {
+	if (!opsClicked && !numOneReady) {
+		numberOne += numbers[prop];
+	} else {
+		numberTwo += numbers[prop];
+	}
+	inScreen.innerHTML += numbers[prop];
+}
+
+
 
 function calcResult( num1, num2, operation ) {
 	switch (operation) {
@@ -100,6 +139,12 @@ function calcResult( num1, num2, operation ) {
 			break;
 		case "-":
 			result = substract(num1, num2);
+			break;
+		case "*":
+			result = multiply(num1, num2);
+			break;
+		case "/":
+			result = divide(num1, num2);
 			break;
 	}
 	inScreen.innerHTML = result;
@@ -110,11 +155,19 @@ function calcResult( num1, num2, operation ) {
 }
 
 function add ( num1, num2 ) {
-	return Number(num1) + Number(num2);
+	return parseFloat(num1) + parseFloat(num2);
 }
 
 function substract ( num1, num2 ) {
-	return Number(num1) - Number(num2);
+	return parseFloat(num1) - parseFloat(num2);
+}
+
+function multiply ( num1, num2 ) {
+	return parseFloat(num1) * parseFloat(num2);
+}
+
+function divide ( num1, num2 ) {
+	return parseFloat(num1) / parseFloat(num2);
 }
 
 
