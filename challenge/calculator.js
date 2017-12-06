@@ -1,5 +1,11 @@
-var store = [];
+//var store = [];
 var result = 0;
+var opsClicked = false;
+var numberOne = "";
+var numOneReady = false;
+var numberTwo = "";
+var numTwoReady = false;
+var ops = "";
 
 var basicOperations = {
 	plus: "+", 
@@ -22,72 +28,93 @@ var numbers = {
 }
 
 document.addEventListener("click", processInput);
-
 function processInput ( event ) {
 	var elementId = event.target.getAttribute("id");
 	switch ( elementId ) {
 		case "one":
-			store.push(numbers.one);
-			printIn();
+			if (!opsClicked && !numOneReady) {
+				numberOne += numbers.one;
+			} else {
+				numberTwo += numbers.one;
+			}
+			inScreen.innerHTML += numbers.one;
 			break;
 		case "two":
-			store.push(numbers.two);
-			printIn();
+			if (!opsClicked && !numOneReady) {
+				numberOne += numbers.two;
+			} else {
+				numberTwo += numbers.two;
+			}
+			inScreen.innerHTML += numbers.two;
+			break;
+		case "three":
+			if (!opsClicked && !numOneReady) {
+				numberOne += numbers.three;
+			} else {
+				numberTwo += numbers.three;
+			}
+			inScreen.innerHTML += numbers.three;
 			break;
 		case "plus":
-			store.push(basicOperations.plus);
-			printIn();
+			ops = basicOperations.plus;
+			opsClicked = true;
+			inScreen.innerHTML += basicOperations.plus;
+			break;
+		case "minus":
+			ops = basicOperations.minus;
+			opsClicked = true;
+			inScreen.innerHTML += basicOperations.minus;
+			break;
+		case "clear":
+			clear();
 			break;
 		case "enter":
-			calcResult(store);
+			opsClicked = false;
+			calcResult(numberOne, numberTwo, ops);
+			console.log(numberOne);
+			console.log(numberTwo);
+			console.log(ops);
 	}
 }
 
 var inScreen = document.getElementById("in");
-// var outScreen = document.getElementById("out");
-
-function printIn ( ) {
-	var print = "";
-	for (var i = 0; i < store.length; i++) {
-		print += store[i] + " ";
-	}
-	inScreen.innerHTML = print;
-}
 
 function printOut ( ) {
 	inScreen.innerHTML = result;
 }
 
-function calcResult( arr ) {
-	var numbers = [];
-	var operation = "";
-	for (var i = 0; i < arr.length; i++) {
-		if (!isNaN(arr[i])) {
-			console.log("is number");
-			numbers.push(arr[i]);
-		} else {
-			if (arr[i] === "+") {
-				operation = basicOperations.plus;
-			}
-		}
-	}
-	switch (operation) {
-		case "+":
-			result = add(numbers);
-			break;
-	}
-	//console.log(numbers, operation);
-	store = [];
-	store.push(result);
-	printOut();
+function clear() {
+	inScreen.innerHTML = "";
+	result = 0;
+	opsClicked = false;
+ 	numberOne = "";
+ 	numberTwo = "";
+ 	ops = "";
+ 	tooMany = false;
 }
 
-function add ( arr ) {
-	var res = 0;
-	for (var i = 0; i < arr.length; i++) {
-		res += arr[i];
+function calcResult( num1, num2, operation ) {
+	switch (operation) {
+		case "+":
+			result = add(num1, num2);
+			break;
+		case "-":
+			result = substract(num1, num2);
+			break;
 	}
-	return res;
+	inScreen.innerHTML = result;
+	numberOne = result;
+	numberTwo = "";
+	numOneReady = true;
+	opsClicked = false;
+}
+
+function add ( num1, num2 ) {
+	return Number(num1) + Number(num2);
+}
+
+function substract ( num1, num2 ) {
+	return Number(num1) - Number(num2);
 }
 
 
