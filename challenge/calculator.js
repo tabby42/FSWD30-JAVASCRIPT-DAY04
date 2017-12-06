@@ -30,10 +30,7 @@ var numbers = {
 //TODOs:
 //remove possible leading zero
 //prevent entering a second operator
-//show last result or operation
 //backspace function -> remove last character from display,
-
-
 
 document.addEventListener("click", processInput);
 function processInput ( event ) {
@@ -169,6 +166,8 @@ function multiply ( num1, num2 ) {
 function divide ( num1, num2 ) {
 	return parseFloat(num1) / parseFloat(num2);
 }
+
+//console.log(eval("9 % 3"));
 
 
 
