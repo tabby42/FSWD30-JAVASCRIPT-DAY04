@@ -78,6 +78,7 @@
 	//e
 	//percent
 	//square root
+	//
 
 	function displayInput () {
 		calculator.input += this.innerHTML;
