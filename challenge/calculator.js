@@ -127,8 +127,6 @@ function numberClicked ( prop ) {
 	inScreen.innerHTML += numbers[prop];
 }
 
-
-
 function calcResult( num1, num2, operation ) {
 	switch (operation) {
 		case "+":
