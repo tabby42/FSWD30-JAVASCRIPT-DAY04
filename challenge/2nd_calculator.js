@@ -35,6 +35,7 @@
 			calculator.input = "";
 			calculator.lastExpr = "";
 			display.innerHTML = "";
+			last.innerHTML = "";
 		},
 		sign: function () {
 			if (calculator.input.toString().charAt(0) == "-") {
@@ -45,13 +46,25 @@
 			display.innerHTML = calculator.input;
 		},
 		removeLast: function () {
-			calculator.input = calculator.input.slice(0, -1);
+			calculator.input = calculator.input.toString().slice(0, -1);
 			display.innerHTML = calculator.input;
 		},
 		square: function () {
 			var temp = calculator.calcResult();
 			if (temp !== "Error" && !isNaN(temp)) {
 				calculator.result = temp * temp;
+				calculator.input = calculator.result;
+				display.innerHTML = calculator.result;
+			} else {
+				calculator.input = "";
+				calculator.result = 0;
+				display.innerHTML = "Error";
+			}
+		},
+		squareRoot: function () {
+			var temp = calculator.calcResult();
+			if (temp !== "Error" && !isNaN(temp)) {
+				calculator.result = Math.sqrt(temp);
 				calculator.input = calculator.result;
 				display.innerHTML = calculator.result;
 			} else {
@@ -70,9 +83,82 @@
 		},
 		showLast: function () {
 			last.innerHTML = calculator.lastExpr;
-		}
-		squareRoot: function () {
-			
+		},
+		percentage: function () {
+			var temp = calculator.input;
+			operator = "";
+			var arr = [];
+			var percent = 0;
+			var foundOp = false;
+			for (var i = temp.length - 1; i >= 0; i--) {
+				if ( temp[i] === "+" || temp[i] === "+" 
+					||  temp[i] === "*" || temp[i] === "*") {
+					operator = temp[i];
+					arr = temp.split(temp[i]);
+					foundOp = true;
+					break;
+				}
+			}
+			if (!foundOp) {
+				percent = temp / 100;
+				calculator.result = percent;
+				calculator.input = calculator.result;
+				display.innerHTML = calculator.result;
+			}
+			switch (operator) {
+				case "+":
+					if (arr.length === 2) {
+						percent = (arr[0] / 100) * arr[1];
+						percent += Number(arr[0]);
+						calculator.result = percent;
+						calculator.input = calculator.result;
+						display.innerHTML = calculator.result;
+					} else {
+						calculator.input = "";
+						calculator.result = 0;
+						display.innerHTML = "Error";
+					}
+					break;
+				case "-":
+					if (arr.length === 2) {
+						percent = (arr[0] / 100) * arr[1];
+						percent -= Number(arr[0]);
+						calculator.result = percent;
+						calculator.input = calculator.result;
+						display.innerHTML = calculator.result;
+					} else {
+						calculator.input = "";
+						calculator.result = 0;
+						display.innerHTML = "Error";
+					}
+					break;
+				case "*":
+					if (arr.length === 2) {
+						percent = (arr[0] / 100) * arr[1];
+						percent *= Number(arr[0]);
+						calculator.result = percent;
+						calculator.input = calculator.result;
+						display.innerHTML = calculator.result;
+					} else {
+						calculator.input = "";
+						calculator.result = 0;
+						display.innerHTML = "Error";
+					}
+					break;
+				case "/":
+					if (arr.length === 2) {
+						percent = (arr[0] / 100) * arr[1];
+						percent /= Number(arr[0]);
+						calculator.result = percent;
+						calculator.input = calculator.result;
+						display.innerHTML = calculator.result;
+					} else {
+						calculator.input = "";
+						calculator.result = 0;
+						display.innerHTML = "Error";
+					}
+					break;
+			}
 		}
 	} 
 
@@ -99,6 +185,7 @@
 	//e
 	document.getElementById("euler").addEventListener("click", calculator.euler);
 	//percent
+	document.getElementById("percent").addEventListener("click", calculator.percentage);
 	//square root
 	document.getElementById("radix").addEventListener("click", calculator.squareRoot);
 
