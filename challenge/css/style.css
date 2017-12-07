@@ -25,11 +25,12 @@ body {
   #inout #in {
     color: #fff;
     font-size: 2em;
-    padding: 50px 0;
+    padding: 30px 0;
     min-height: 55px; }
   #inout #lastExpression {
     color: #fff;
-    padding-bottom: 10px; }
+    padding-bottom: 10px;
+    height: 30px; }
 
 .flex-row {
   display: -webkit-box;
